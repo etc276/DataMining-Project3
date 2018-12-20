@@ -4,6 +4,7 @@ from collections import defaultdict
 
 from modules.hits import hits
 from modules.page_rank import page_rank
+from modules.sim_rank import sim_rank
 
 class Graph:
 
@@ -47,3 +48,7 @@ if __name__=='__main__':
     # Page Rank
     ranks = page_rank(graph, d=0.3)
     print('rank:', ranks)
+
+    # Sim Rank
+    S = sim_rank(graph)
+    print(S)
