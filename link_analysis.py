@@ -3,6 +3,7 @@ import numpy as np
 from collections import defaultdict
 
 from modules.hits import hits
+from modules.page_rank import page_rank
 
 class Graph:
 
@@ -34,11 +35,15 @@ def get_graph(argv):
 
 if __name__=='__main__':
 
-    # read data and return graph
+    # Read data and return graph
     graph = get_graph(sys.argv)
+    # print('node:', graph.nodes)
 
     # HITS
     auth, hubs = hits(graph)
     print('auth:', auth)
     print('hubs:', hubs)
-    
+
+    # Page Rank
+    ranks = page_rank(graph, d=0.3)
+    print('rank:', ranks)
