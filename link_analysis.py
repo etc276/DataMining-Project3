@@ -27,6 +27,7 @@ def get_graph(argv):
     with open(fname, 'r') as fp:
         for line in fp:
             a, b = line.rstrip('\n').split(',')
+            a, b = int(a), int(b)
             nodes.add(a)
             nodes.add(b)
             sources[a].append(b)
