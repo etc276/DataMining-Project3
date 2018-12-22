@@ -13,4 +13,7 @@ def page_rank(graph, n_iter=10, d=0.15):
                 rank += tmp
             ranks[node] = d / num_nodes + (1 - d) * rank
 
+    for key, value in ranks.items():
+        ranks[key] = float(format(value, '.4f'))
+        
     return ranks

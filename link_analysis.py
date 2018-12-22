@@ -1,4 +1,5 @@
 import sys
+import copy
 import numpy as np
 from collections import defaultdict
 
@@ -35,21 +36,43 @@ def get_graph(argv):
 
     return Graph(nodes, sources, targets)
 
+def get_max_index(dic):
+    max_index, max_value = -1, -1
+    for (key, value) in dic.items():
+        if key != 1 and value > max_value:
+            max_index = key
+            max_value = value
+
+    return max_index
+
 if __name__=='__main__':
 
     # Read data and return graph
     graph = get_graph(sys.argv)
-    # print('node:', graph.nodes)
 
-    # HITS
+    # HITS and PageRank
+    ## Before
     auth, hubs = hits(graph)
+    ranks = page_rank(graph, d=0.3)
+    print('\nOriginal graph')
     print('auth:', auth)
     print('hubs:', hubs)
-
-    # Page Rank
-    ranks = page_rank(graph, d=0.3)
     print('rank:', ranks)
 
-    # Sim Rank
-    S = sim_rank(graph)
-    print(S)
+    ## After
+    graph_copy = copy.deepcopy(graph)
+    max_index_auth = get_max_index(auth)
+    max_index_hubs = get_max_index(hubs)
+    graph_copy.sources[1].append(max_index_auth)
+    graph_copy.targets[1].append(max_index_hubs)
+    auth, hubs = hits(graph_copy)
+    ranks = page_rank(graph_copy, d=0.15)
+    print('\nAfter add one link ...')
+    print('auth:', auth)
+    print('hubs:', hubs)
+    print('rank:', ranks)
+
+    # # Sim Rank
+    # S = sim_rank(graph)
+    # print('\nSimRank:')
+    # print(S)

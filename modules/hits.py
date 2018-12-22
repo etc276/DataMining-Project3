@@ -20,6 +20,12 @@ def hits(graph, n_iter=5, epison=1e-5):
         if sum(delta_auth) + sum(delta_hubs) < epison:
             break
 
+    for key, value in auth.items():
+        auth[key] = float(format(value, '.4f'))
+
+    for key, value in hubs.items():
+        hubs[key] = float(format(value, '.4f'))
+
     return (auth, hubs)
 
 def sum_hubs(graph, node, hubs):
