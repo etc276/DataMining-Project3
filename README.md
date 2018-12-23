@@ -1,4 +1,4 @@
-# HW3 note
+# Link Analysis
 
 Implementing three algorithms : HITS, PageRank and SimRank.
 
@@ -45,6 +45,7 @@ link_analysis.py (main)
     * update maxtrix with average of sum of `S(Ii[a], Ii[b])`
     * until max_iteration or delta < epison
 
+---
 * all delta is one-norm normalization
 * To increase auth, hubs and PageRank, just add link to node 1
 
@@ -97,7 +98,6 @@ link_analysis.py (main)
 > 
 
 * We can see SimRank is the slowest, because it need iter n * n matrix, while others is iter number of edge 
-
 * Compare graph_5 and graph_6, time is (about) propotional to edge
 * Compare directed and bi-directed, we can see page rank is faster in bi-directed than in directed.
 * I guess if a graph is fully-connected, it converge soon 
@@ -115,27 +115,20 @@ link_analysis.py (main)
     * link analysis is link-based algorithm, so we can set some limitation on links
     * such as each node can have 5 out-neighbor at most
     * or give reward / punishment to a SCC(Strongly Connected Component) or else.
-
 * Can link analysis algorithms really find the "important" pages from Web?
     * may be not, since we can easily adjust our auth, hubs by add link
     * for example, we can create many website (even with different domain) to create a group. In group, we link to each other, or the most "important" page
-
 * What are practical issues when implement these algorithms in a real Web?
     * according to [Total number of Websites](http://www.internetlivestats.com/total-number-of-websites/), there is about 2 billion website in the world
     * so the most issue is, how to find "important" page in a few second with large data
     * also, web page is active (creating / deleting), so we need to maitain our table (if used)
-
 * What do the result say for your actor/movie graph?
     * uh..., there is no movie graph in our dataset this year.
-
 * Any new idea about the link analysis algorithm?
     * maybe we can use machine learing to learn the result, such as use link as X, hubs as Y
-
 * What is the effect of “C” parameter in SimRank?
     * C is decay factor
     * because the original formula is recursive, we need a decay factor to converge.
     * if C is small, it converge soon
-
 * Design a new link-based similarity measurement
     * give up
-
