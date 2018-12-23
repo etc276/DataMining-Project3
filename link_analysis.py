@@ -32,8 +32,10 @@ def get_graph(argv):
             a, b = int(a), int(b)
             nodes.add(a)
             nodes.add(b)
-            sources[a].append(b)
-            targets[b].append(a)
+            if b not in sources[a]:
+                sources[a].append(b)
+            if a not in sources[b]:
+                targets[b].append(a)
 
     return Graph(nodes, sources, targets)
 
@@ -62,9 +64,9 @@ if __name__=='__main__':
     t3 = time.time()
 
     print('\n*** Before')
-    print('auth:', auth)
-    print('hubs:', hubs)
-    print('rank:', ranks)
+    # print('auth:', auth)
+    # print('hubs:', hubs)
+    # print('rank:', ranks)
     print('\n[Time] HITS:', t2 - t1, 's')
     print('[Time] PageRank:', t3 - t2, 's')
     print('----------------------------------------')
@@ -81,18 +83,18 @@ if __name__=='__main__':
     t3 = time.time()
 
     print('\n*** After')
-    print('auth:', auth)
-    print('hubs:', hubs)
-    print('rank:', ranks)
+    # print('auth:', auth)
+    # print('hubs:', hubs)
+    # print('rank:', ranks)
     print('\n[Time] HITS:', t2 - t1, 's')
     print('[Time] PageRank:', t3 - t2, 's')
     print('----------------------------------------')
 
-    # Sim Rank
+    # # Sim Rank
     t1 = time.time()
     S = sim_rank(graph)
     t2 = time.time()
-    print('\nSimRank')
-    print(S)
+    # print('\nSimRank')
+    # print(S)
     print('\n[Time] SimRank:', t2 - t1, 's')
-    print('----------------------------------------')
+    # print('----------------------------------------')
