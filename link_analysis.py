@@ -72,7 +72,7 @@ if __name__=='__main__':
     print('hubs:', hubs)
     print('rank:', ranks)
 
-    # # Sim Rank
-    # S = sim_rank(graph)
-    # print('\nSimRank:')
-    # print(S)
+    # Sim Rank
+    S = sim_rank(graph)
+    print('\nSimRank:')
+    print(S)

@@ -20,7 +20,13 @@ def sim_rank(graph, C=0.9, n_iter=100):
                         tmp += last_S[sa - 1][sb - 1]
 
                 S[a - 1][b - 1] = C / (len_a * len_b) * tmp
-    
+
+
+    for i in range(num_node):
+        for j in range(num_node):
+            value = S[i][j]
+            S[i][j] = float(format(value, '.4f'))
+
     return S
 
 
