@@ -1,5 +1,6 @@
 import sys
 import copy
+import time
 import numpy as np
 from collections import defaultdict
 
@@ -54,25 +55,44 @@ if __name__=='__main__':
 
     # HITS and PageRank
     ## Before
+    t1 = time.time()
     auth, hubs = hits(graph)
-    ranks = page_rank(graph, d=0.3)
-    print('\nOriginal graph')
+    t2 = time.time()
+    ranks = page_rank(graph)
+    t3 = time.time()
+
+    print('\n*** Before')
     print('auth:', auth)
     print('hubs:', hubs)
     print('rank:', ranks)
+    print('\n[Time] HITS:', t2 - t1, 's')
+    print('[Time] PageRank:', t3 - t2, 's')
+    print('----------------------------------------')
 
     ## After
     graph_copy = copy.deepcopy(graph)
     add_link(auth, graph_copy.sources[1])
     add_link(hubs, graph_copy.targets[1])
+
+    t1 = time.time()
     auth, hubs = hits(graph_copy)
-    ranks = page_rank(graph_copy, d=0.15)
-    print('\nAfter add one link ...')
+    t2 = time.time()
+    ranks = page_rank(graph_copy)
+    t3 = time.time()
+
+    print('\n*** After')
     print('auth:', auth)
     print('hubs:', hubs)
     print('rank:', ranks)
+    print('\n[Time] HITS:', t2 - t1, 's')
+    print('[Time] PageRank:', t3 - t2, 's')
+    print('----------------------------------------')
 
     # Sim Rank
+    t1 = time.time()
     S = sim_rank(graph)
-    print('\nSimRank:')
+    t2 = time.time()
+    print('\nSimRank')
     print(S)
+    print('\n[Time] SimRank:', t2 - t1, 's')
+    print('----------------------------------------')

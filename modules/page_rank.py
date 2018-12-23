@@ -1,5 +1,5 @@
 
-def page_rank(graph, n_iter=10, d=0.15):
+def page_rank(graph, n_iter=10, d=0.15, epison=1e-5):
     num_nodes = len(graph.nodes)
     ranks = dict.fromkeys(graph.nodes, 1.0 / num_nodes)
 
@@ -12,6 +12,10 @@ def page_rank(graph, n_iter=10, d=0.15):
                 # print(node, source, tmp)
                 rank += tmp
             ranks[node] = d / num_nodes + (1 - d) * rank
+
+        delta = [abs(last_ranks[k] - ranks[k]) for k in ranks]
+        if sum(delta) < epison:
+            break
 
     for key, value in ranks.items():
         ranks[key] = float(format(value, '.4f'))

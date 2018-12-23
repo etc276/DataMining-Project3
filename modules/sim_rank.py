@@ -1,6 +1,6 @@
 import numpy as np
 
-def sim_rank(graph, C=0.9, n_iter=100):
+def sim_rank(graph, C=0.9, n_iter=100, epison=1e-5):
     num_node = len(graph.nodes)
     S = np.identity(num_node)
 
@@ -20,6 +20,13 @@ def sim_rank(graph, C=0.9, n_iter=100):
                         tmp += last_S[sa - 1][sb - 1]
 
                 S[a - 1][b - 1] = C / (len_a * len_b) * tmp
+
+        delta = 0
+        for i in range(num_node):
+            for j in range(num_node):
+                delta += abs(S[i][j] - last_S[i][j])
+        if delta < epison:
+            break
 
 
     for i in range(num_node):
